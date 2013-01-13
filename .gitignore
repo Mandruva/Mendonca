@@ -11,3 +11,92 @@
 *.lai
 *.la
 *.a
+
+#include <iostream>
+#include <fstream>
+#include <ios>
+#include <istream>
+#include <iostream>
+#include <iosfwd>
+#include <iomanip>
+#include <ostream>
+#include <sstream>
+#include <streambuf>
+#include <string>
+#include <algorithm>
+#include <functional>
+#include <iterator>
+#include <locale>
+ #include <memory>
+#include <stdexcept>
+#include <utility>
+#include <bitset>
+
+using std::cout;
+using std::endl;
+
+//definicao do tipo de dados abstrato (ADT) Time
+class Time{
+public:
+Time(); //construtor
+void setTime(int,int,int); //inicializa hora, minuto,segundo
+void printMilitary();//imprime no formato militar
+void printStandart();// imprime hora no formato padrao
+
+private:
+int hour;
+int minute;
+int second;
+};
+
+//construtor de Time inicializa cada membro de dados com zeros para
+//garantir que todos os objetos do tipo Time comecam em um estado consistente.
+Time::Time(){hour=minute=second=0;};
+//inicializa um novo valor de Time usando hora militar. Executa testes de validade sovre os valores de dados. Zera valores inválidos.
+void Time::setTime(int h,int m, int s)
+{
+  hour=(h>0&&h<24)? h:0;
+  minute=(m>=0&&m<60)?m:0;
+  second=(s>=0&&s<60)?s:0;
+
+
+};
+//Imprime Time no formato militar
+void Time::printMilitary(){
+cout<<(hour<10?"0":"")<<hour<<":"<<(minute<10?"0":"")<<minute;
+
+};
+
+//Imprime Time no formato padrao
+void Time::printStandart()
+{
+    cout<<((hour==0||hour==12)?12:hour%12)
+    <<":"<<(minute<10?"0":"")<<minute
+    <<":"<<(second<10?"0":"")<<second
+    <<(hour<12?"da manha":"da tarde");
+};
+//Programa para testar a classe Time simples
+
+int main()
+{
+    Time t; //instancia(cria) objeto t da classe Time
+
+    cout<<"A hora militar inicial eh ";
+    t.printMilitary();
+    cout<<"\n A hora padrao inicial eh ";
+    t.printStandart();
+
+    t.setTime(13,27,6);
+    cout<<"\n\n A hora militar depois de setTime eh ";
+    t.printMilitary();
+    cout<<"\n A hora padrao depois de setTime eh ";
+    t.printStandart();
+    t.setTime(99,99,99);//tenta inicializacao invalida
+    cout<<"\n\nApos tentar inicializacao invalida: "
+    <<"\n Hora militar: ";
+    t.printMilitary();
+    cout<<"\n Hora padrao: ";
+    t.printStandart();
+    cout<<endl;
+    return 0;
+}
