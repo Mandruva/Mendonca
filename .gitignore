@@ -85,7 +85,7 @@ int main()
     t.printMilitary();
     cout<<"\n A hora padrao inicial eh ";
     t.printStandart();
-
+   cout<<" UMA PROPOSTA DE MODIFICACAO"<<endl;
     t.setTime(13,27,6);
     cout<<"\n\n A hora militar depois de setTime eh ";
     t.printMilitary();
